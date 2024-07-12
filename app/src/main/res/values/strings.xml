@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">simple-diary-planner</string>
+    <string name="button_create_task">Create Task</string>
+    <string name="toast_task_created">Task created successfully</string>
+    <string name="task_name">Task Name</string>
+    <string name="task_description">Task Description</string>
+    <string name="button_back">Back</string>
+    <string name="description">Description must be from 5 to 40 characters</string>
+    <string name="name_too_short">Name must be from 3 to 22 characters</string>
+    <string name="fill_all_fields_correctly">Fill all fields correctly</string>
+    <string name="task_already_exists">Task already exists at this time</string>
+</resources>
