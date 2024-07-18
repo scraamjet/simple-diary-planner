@@ -17,25 +17,26 @@ class CalendarViewModel @Inject constructor(private val calendarUseCase: Calenda
     val state: StateFlow<CalendarState> get() = _state.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            _state.collect { state ->
-                calendarUseCase.getTasksForDate(state.selectedDate).collect { result ->
-                    when (result) {
-                        is TaskResult.Success -> _state.value = state.copy(tasks = result.data ?: emptyList())
-                        is TaskResult.Error -> _error.value = result.message
-                    }
-                }
-            }
-        }
+        loadTasksForSelectedDate()
     }
 
     fun onSelectDate(event: CalendarEvent) {
         when (event) {
             is CalendarEvent.SelectDate -> {
                 _state.value = _state.value.copy(selectedDate = event.date)
+                loadTasksForSelectedDate()
+            }
+        }
+    }
+
+    private fun loadTasksForSelectedDate() {
+        viewModelScope.launch {
+            calendarUseCase.getTasksForDate(_state.value.selectedDate).collect { result ->
+                when (result) {
+                    is TaskResult.Success -> _state.value = _state.value.copy(tasks = result.data ?: emptyList())
+                    is TaskResult.Error -> _error.value = result.message
+                }
             }
         }
     }
 }
-
-

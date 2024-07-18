@@ -36,32 +36,32 @@ class CalendarScreen : BaseScreen<CalendarViewModel>() {
         val tasks = state.tasks
         val selectedDate = state.selectedDate
 
-            Column(modifier = Modifier.padding(8.dp)) {
-                BasicCalendar(
-                    selectedDate = selectedDate,
-                    onDateSelected = { date -> viewModel.onSelectDate(CalendarEvent.SelectDate(date)) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp)
-                )
+        Column(modifier = Modifier.padding(8.dp)) {
+            BasicCalendar(
+                selectedDate = selectedDate,
+                onDateSelected = { date -> viewModel.onSelectDate(CalendarEvent.SelectDate(date)) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
+            )
 
-                LazyColumn(modifier = Modifier.weight(1f)) {
-                    items(tasks) { task ->
-                        TaskItem(task = task, onClick = { navigaton.navigateToTaskDetail(task.id) })
-                    }
+            LazyColumn(modifier = Modifier.weight(1f)) {
+                items(tasks) { task ->
+                    TaskItem(task = task, onClick = { navigaton.navigateToTaskDetail(task.id) })
                 }
+            }
 
-                Button(
-                    onClick = { navigaton.navigateToCreateTask() },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp)
-                ) {
-                    Text(text = "Create Task", color = MaterialTheme.colorScheme.onPrimary)
-                }
+            Button(
+                onClick = { navigaton.navigateToCreateTask() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            ) {
+                Text(text = "Create Task", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
+}
 
 @Composable
 fun TaskItem(task: Task, onClick: () -> Unit) {
