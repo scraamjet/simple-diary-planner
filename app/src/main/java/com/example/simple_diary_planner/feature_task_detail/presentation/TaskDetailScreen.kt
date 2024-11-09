@@ -50,7 +50,8 @@ class TaskDetailScreen : BaseScreen<TaskDetailViewModel>() {
 
                     IconButton(
                         onClick = { navigaton.navigateBack() },
-                        modifier = Modifier.constrainAs(backButton) {
+                        modifier = Modifier.padding(top = 16.dp)
+                            .constrainAs(backButton) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
                         }
